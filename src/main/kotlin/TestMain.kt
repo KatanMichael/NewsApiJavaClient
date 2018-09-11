@@ -1,6 +1,8 @@
 import controller.NewsController
 import interfaces.getArticlesListener
+import interfaces.getSourcesListener
 import model.Article
+import model.Source
 
 class TestMain
 
@@ -11,9 +13,9 @@ fun main(args: Array<String>)
 {
     val myNewsController = NewsController(API_KEY)
 
-    myNewsController.getNewsArticles("","","","",object :
+    myNewsController.getNewsArticles("pokemon","ign","","",object :
             getArticlesListener {
-        override fun onRecived(articles: Array<Article>?)
+        override fun onReceived(articles: Array<Article>?)
         {
             if(articles != null)
             {
@@ -38,4 +40,24 @@ fun main(args: Array<String>)
 
     })
 
+
+    myNewsController.getNewsSources("","","",
+            object : getSourcesListener {
+                override fun onReceived(sources: Array<Source>?)
+                {
+                    if(sources != null)
+                    {
+                        for(s in sources)
+                        {
+                            println(s)
+                        }
+                    }
+                }
+
+                override fun onError(error: String?)
+                {
+                    println(error)
+                }
+
+            })
 }

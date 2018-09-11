@@ -21,9 +21,9 @@ class NewsControllerTest
     {
         val myNewsController =  NewsController(API_KEY)
 
-        myNewsController.getNewsArticles("","","","",object :
+        myNewsController.getNewsArticles("android","","","",object :
                 getArticlesListener {
-            override fun onRecived(articles: Array<Article>?)
+            override fun onReceived(articles: Array<Article>?)
             {
                 if(articles != null)
                 {

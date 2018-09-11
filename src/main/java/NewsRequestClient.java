@@ -15,4 +15,5 @@ public interface NewsRequestClient
                                                  @Query ("domains") String domains,
                                                  @Query ("language") String language);
 
+
 }
