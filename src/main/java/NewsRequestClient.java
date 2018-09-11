@@ -16,4 +16,8 @@ public interface NewsRequestClient
                                                  @Query ("language") String language);
 
 
+        @GET("/v2/top-headlines")
+        Call<ArticalsRequets> getTopHeadlines(@Query ("apiKey") String apiKey,@Query ("country") String country ,@Query ("q") String keyWord, @Query ("sources") String sources
+                ,@Query ("category") String category);
+
 }

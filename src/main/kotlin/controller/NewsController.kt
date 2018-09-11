@@ -87,4 +87,30 @@ class NewsController(private var API_KEY: String)
 
     }
 
+    fun getTopHeadlines(country: String, category: String, sources: String,
+                        keyWord: String,articlesListener: getArticlesListener )
+    {
+        newsClient.getTopHeadlines(API_KEY,country,keyWord,sources,category)
+                .enqueue(object :
+                        Callback<ArticalsRequets>
+                {
+                    override fun onFailure(call: Call<ArticalsRequets>, t: Throwable)
+                    {
+                        articlesListener.onError(t.message)
+                    }
+
+                    override fun onResponse(call: Call<ArticalsRequets>, response: Response<ArticalsRequets>)
+                    {
+                        val body = response.body()
+
+                        if(body != null)
+                        {
+                            articlesListener.onReceived(body.articles)
+                        }
+
+                    }
+
+                })
+    }
+
 }
