@@ -12,7 +12,7 @@ Step 1)
 			maven { url 'https://jitpack.io' }
 		}
 	}
-	```
+```
 
 Step 2)
 ```shell
