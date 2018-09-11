@@ -13,7 +13,7 @@ fun main(args: Array<String>)
 {
     val myNewsController = NewsController(API_KEY)
 
-    myNewsController.getNewsArticles("pokemon","ign","","",object :
+    myNewsController.getNewsArticles("","","","",object :
             getArticlesListener {
         override fun onReceived(articles: Array<Article>?)
         {
@@ -41,7 +41,7 @@ fun main(args: Array<String>)
     })
 
 
-    myNewsController.getNewsSources("","","",
+    myNewsController.getNewsSources("","he","",
             object : getSourcesListener {
                 override fun onReceived(sources: Array<Source>?)
                 {
@@ -57,6 +57,28 @@ fun main(args: Array<String>)
                 override fun onError(error: String?)
                 {
                     println(error)
+                }
+
+            })
+
+    myNewsController.getTopHeadlines("il","","","",
+            object :
+                    getArticlesListener
+            {
+                override fun onReceived(articles: Array<Article>?)
+                {
+                    if(articles != null)
+                    {
+                        for(a in articles)
+                        {
+                            println(a)
+                        }
+                    }
+                }
+
+                override fun onError(Error: String?)
+                {
+                    println(Error)
                 }
 
             })
