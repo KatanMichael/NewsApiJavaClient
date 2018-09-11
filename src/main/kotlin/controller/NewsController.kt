@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class NewsController(var API_KEY: String)
+class NewsController(private var API_KEY: String)
 {
 
     private val retrofitNews = Retrofit.Builder().baseUrl("https://newsapi.org/")
@@ -19,7 +19,7 @@ class NewsController(var API_KEY: String)
     private val newsClient = retrofitNews.create(NewsRequestClient::class.java)
 
 
-    fun getNewsSources(keyWord: String = "", sources: String = ""
+    fun getNewsArticles(keyWord: String = "", sources: String = ""
                        , domain: String = "", language: String = ""
                        ,articlesListener: getArticlesListener )
     {
@@ -31,7 +31,7 @@ class NewsController(var API_KEY: String)
                     {
                         if(t != null)
                         {
-                            articlesListener.onError(t.message)
+                            articlesListener.onError("onFailure - ${t.message}")
                         }
 
                     }
@@ -40,9 +40,15 @@ class NewsController(var API_KEY: String)
                     {
                         val body = response?.body()
 
-                        val articles = body?.articles
+                        if(body != null)
+                        {
+                            val articles = body?.articles
 
-                        articlesListener.onRecived(articles)
+                            articlesListener.onRecived(articles)
+                        }else
+                        {
+                            articlesListener.onError("OnResponse - ${response?.message()}}")
+                        }
 
                     }
 
