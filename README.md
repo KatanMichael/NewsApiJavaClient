@@ -5,6 +5,7 @@
 Gradle:
 
 PM>
+```shell
 	allprojects {
 		repositories {
 			...
